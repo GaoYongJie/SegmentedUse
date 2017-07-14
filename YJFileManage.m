@@ -50,6 +50,7 @@ static NSString * const accessoryName = @"Accessory";
     NSMutableArray * word;
     NSMutableArray * excel;
     NSMutableArray * pdf;
+//    NSMutableDictionary * dic ;//= [NSMutableDictionary dictionary];
     while (filename = [enumerator nextObject]) {
         
         if ([[filename pathExtension] isEqualToString:@"doc"] || [[filename pathExtension] isEqualToString:@"docx"])
@@ -61,6 +62,7 @@ static NSString * const accessoryName = @"Accessory";
                 word = [NSMutableArray array];
             }
             [word addObject:filename];
+            
             NSLog(@"%ld",l);
         }
         else if ([[filename pathExtension] isEqualToString:@"xls"])
@@ -89,6 +91,7 @@ static NSString * const accessoryName = @"Accessory";
     }
     
   return  @{@"WORD":word, @"EXCEL":excel, @"PDF":pdf};
+//    return dic;
 }
 
 + (long)fileSizeAtPath:(NSString *)filePath

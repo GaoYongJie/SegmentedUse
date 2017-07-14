@@ -8,12 +8,15 @@
 
 #import "AccessoryTableView.h"
 #import "YJFileManage.h"
-
-static NSString * const identifier = @"asdfasfwe";
+#import "AccessorySectionHeadView.h"
+#import "SectionMode.h"
+static NSString * const kCellIdentifier = @"asdfasfwe";
+static NSString * const kHeadIdentifier = @"asdfewfadc";
 @interface AccessoryTableView () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, copy) NSDictionary  * dataDic;
 @property (nonatomic, copy) NSArray  * allKeysArr;
+@property (nonatomic, copy) NSMutableArray * sectionData;
 
 @end
 
@@ -25,10 +28,23 @@ static NSString * const identifier = @"asdfasfwe";
     {
         self.delegate = self;
         self.dataSource = self;
+        self.sectionHeaderHeight = 40;
+        self.rowHeight = 60;
         _dataDic = [[YJFileManage returnAllAccessory] copy];
         _allKeysArr = [_dataDic allKeys];
-        [self registerClass:[UITableViewCell class] forCellReuseIdentifier:identifier];
-//        [self registerNib:<#(nullable UINib *)#> forHeaderFooterViewReuseIdentifier:<#(nonnull NSString *)#>]
+        _sectionData = [NSMutableArray array];
+        
+        for (NSString *title in _allKeysArr)
+        {
+            SectionMode * model = [SectionMode new];
+            model.isExpanded = NO;
+            model.sectionTitle = title;
+            model.rowNum = [_dataDic[title] count];
+            [_sectionData addObject:model];
+        }
+        self.backgroundColor = [UIColor whiteColor];
+        [self registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
+        [self registerNib:[UINib nibWithNibName:@"AccessorySectionHeadView" bundle:nil] forHeaderFooterViewReuseIdentifier:kHeadIdentifier];
     }
     return self;
 }
@@ -39,20 +55,35 @@ static NSString * const identifier = @"asdfasfwe";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    NSString *tempStr = _allKeysArr[section];
-    return [_dataDic[tempStr] count];
+{    
+    SectionMode *mode = _sectionData[section];
+    if (mode.isExpanded)
+    {
+        return mode.rowNum;
+    }
+    else
+    {
+        return 0;
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
     NSString * tempStr = _allKeysArr[indexPath.section];
     cell.textLabel.text = _dataDic[tempStr][indexPath.row];
     return cell;
 }
-- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return _allKeysArr[section];
+    AccessorySectionHeadView * headView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kHeadIdentifier];
+    headView.mode = _sectionData[section];
+    headView.clickBlock = ^{
+        [tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
+    };
+    headView.backgroundColor = [UIColor redColor];
+    return headView;
 }
 @end

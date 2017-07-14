@@ -24,6 +24,10 @@
     vc.view.frame = [UIScreen mainScreen].bounds;
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:vc];
     
+    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:nil];
+//    nav.navigationItem.rightBarButtonItem = right;
+//    nav.navigationController.navigationItem.rightBarButtonItem = right;
+    vc.navigationController.navigationItem.rightBarButtonItem = right;
     [tab addChildViewController:nav];
     self.window.rootViewController = tab;
     [self.window setBackgroundColor:[UIColor whiteColor]];

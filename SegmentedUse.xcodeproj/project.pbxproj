@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E1C3DF71F186F6000BC3E00 /* AccessorySectionHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1C3DF61F186F6000BC3E00 /* AccessorySectionHeadView.m */; };
+		3E1C3DF91F1871CD00BC3E00 /* right_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1C3DF81F1871CD00BC3E00 /* right_more.png */; };
+		3E1C3DFD1F18725600BC3E00 /* AccessorySectionHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E1C3DFC1F18725600BC3E00 /* AccessorySectionHeadView.xib */; };
+		3E1C3E001F18767B00BC3E00 /* SectionMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1C3DFF1F18767B00BC3E00 /* SectionMode.m */; };
 		3E81F1C41F174849000FF3A7 /* 移动校园ios系统修改说明书20170527.doc in Resources */ = {isa = PBXBuildFile; fileRef = 3E81F1C31F174831000FF3A7 /* 移动校园ios系统修改说明书20170527.doc */; };
 		3E81F1EB1F174BAB000FF3A7 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E81F1C81F174BAB000FF3A7 /* AFHTTPSessionManager.m */; };
 		3E81F1EC1F174BAB000FF3A7 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E81F1CB1F174BAB000FF3A7 /* AFNetworkReachabilityManager.m */; };
@@ -47,6 +51,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E1C3DF51F186F6000BC3E00 /* AccessorySectionHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessorySectionHeadView.h; sourceTree = "<group>"; };
+		3E1C3DF61F186F6000BC3E00 /* AccessorySectionHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessorySectionHeadView.m; sourceTree = "<group>"; };
+		3E1C3DF81F1871CD00BC3E00 /* right_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_more.png; sourceTree = "<group>"; };
+		3E1C3DFC1F18725600BC3E00 /* AccessorySectionHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccessorySectionHeadView.xib; sourceTree = "<group>"; };
+		3E1C3DFE1F18767B00BC3E00 /* SectionMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionMode.h; sourceTree = "<group>"; };
+		3E1C3DFF1F18767B00BC3E00 /* SectionMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionMode.m; sourceTree = "<group>"; };
 		3E81F1C31F174831000FF3A7 /* 移动校园ios系统修改说明书20170527.doc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "移动校园ios系统修改说明书20170527.doc"; sourceTree = "<group>"; };
 		3E81F1C71F174BAB000FF3A7 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		3E81F1C81F174BAB000FF3A7 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
@@ -225,6 +235,12 @@
 				3E81F1FD1F175644000FF3A7 /* YJFileManage.m */,
 				3E81F1FF1F176F21000FF3A7 /* AccessoryTableView.h */,
 				3E81F2001F176F21000FF3A7 /* AccessoryTableView.m */,
+				3E1C3DF51F186F6000BC3E00 /* AccessorySectionHeadView.h */,
+				3E1C3DF61F186F6000BC3E00 /* AccessorySectionHeadView.m */,
+				3E1C3DFC1F18725600BC3E00 /* AccessorySectionHeadView.xib */,
+				3E1C3DFE1F18767B00BC3E00 /* SectionMode.h */,
+				3E1C3DFF1F18767B00BC3E00 /* SectionMode.m */,
+				3E1C3DF81F1871CD00BC3E00 /* right_more.png */,
 				3ECCF0271F15F92C00767251 /* Masonry */,
 				3E81F1C51F174BAB000FF3A7 /* AFNetworking */,
 				3ECCF0191F15EED300767251 /* Main.storyboard */,
@@ -336,6 +352,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ECCF0201F15EED300767251 /* LaunchScreen.storyboard in Resources */,
+				3E1C3DFD1F18725600BC3E00 /* AccessorySectionHeadView.xib in Resources */,
+				3E1C3DF91F1871CD00BC3E00 /* right_more.png in Resources */,
 				3ECCF01D1F15EED300767251 /* Assets.xcassets in Resources */,
 				3ECCF01B1F15EED300767251 /* Main.storyboard in Resources */,
 				3E81F1C41F174849000FF3A7 /* 移动校园ios系统修改说明书20170527.doc in Resources */,
@@ -359,12 +377,14 @@
 				3E81F1F41F174BAB000FF3A7 /* AFImageDownloader.m in Sources */,
 				3ECCF0461F15F92C00767251 /* MASViewConstraint.m in Sources */,
 				3E81F1F21F174BAB000FF3A7 /* README.md in Sources */,
+				3E1C3DF71F186F6000BC3E00 /* AccessorySectionHeadView.m in Sources */,
 				3ECCF0411F15F92C00767251 /* MASCompositeConstraint.m in Sources */,
 				3ECCF0471F15F92C00767251 /* NSArray+MASAdditions.m in Sources */,
 				3E81F1F01F174BAB000FF3A7 /* AFURLSessionManager.m in Sources */,
 				3ECCF0181F15EED300767251 /* ViewController.m in Sources */,
 				3E81F1EC1F174BAB000FF3A7 /* AFNetworkReachabilityManager.m in Sources */,
 				3ECCF0151F15EED200767251 /* AppDelegate.m in Sources */,
+				3E1C3E001F18767B00BC3E00 /* SectionMode.m in Sources */,
 				3ECCF0441F15F92C00767251 /* MASLayoutConstraint.m in Sources */,
 				3E81F1EF1F174BAB000FF3A7 /* AFURLResponseSerialization.m in Sources */,
 				3E81F1EE1F174BAB000FF3A7 /* AFURLRequestSerialization.m in Sources */,

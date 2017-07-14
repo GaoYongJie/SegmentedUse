@@ -58,6 +58,7 @@
 {
     //远程地址
     NSURL *URL = [NSURL URLWithString:@"http://www.baidu.com/img/bdlogo.png"];
+//    NSURL *URL = [NSURL URLWithString:@"https://pan.baidu.com/s/1jHCZ1uY"];
     //默认配置
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     
@@ -84,10 +85,6 @@
         
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
         
-        //- block的返回值, 要求返回一个URL, 返回的这个URL就是文件的位置的路径
-//        NSString * path = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
-//        NSString * createNewPath = [NSString stringWithFormat:@"%@/accessory", path];
-//        NSString *patha = [createNewPath stringByAppendingPathComponent:response.suggestedFilename];
         [YJFileManage createNewCatalog];
         return [NSURL fileURLWithPath:[YJFileManage returnNewPahtAndFileName:response.suggestedFilename]];
         
@@ -95,8 +92,8 @@
         //设置下载完成操作
         // filePath就是你下载文件的位置，你可以解压，也可以直接拿来使用
         
-        NSString *imgFilePath = [filePath path];// 将NSURL转成NSString
-        UIImage *img = [UIImage imageWithContentsOfFile:imgFilePath];
+//        NSString *imgFilePath = [filePath path];// 将NSURL转成NSString
+//        UIImage *img = [UIImage imageWithContentsOfFile:imgFilePath];
 //        self.imageView.image = img;
         
     }];
@@ -106,7 +103,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self load];
+//    [self load];
     self.view.backgroundColor = [UIColor whiteColor];
     
     _btn = [[UIButton alloc] initWithFrame:(CGRect){100, 100 ,200 ,200}];
