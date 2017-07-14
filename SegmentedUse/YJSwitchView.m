@@ -46,7 +46,7 @@
 - (void)initialization
 {
     _selectedSliderColor = [UIColor redColor];
-    _sliderViewHeight = 30;
+    _sliderViewHeight = 50;
 }
 //- (void)setTitles:(NSArray *)titles
 //{
@@ -74,7 +74,7 @@
     
     UIView * bottomView = [UIView new];
     bottomView.backgroundColor = _selectedSliderColor;
-    bottomView.frame = (CGRect){0, 28, self.bounds.size.width / _itemCount, 2};
+    bottomView.frame = (CGRect){0, _sliderViewHeight - 2, self.bounds.size.width / _itemCount, 2};
     
     [_segmented addSubview:bottomView];
     _bottomView = bottomView;

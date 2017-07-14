@@ -24,8 +24,6 @@
 {
     YJSwitchView * yj = [YJSwitchView switchViewWithFrame:(CGRect){0, 64, self.view.bounds.size.width, self.view.bounds.size.height - 64 - 49} titles:@[@"文档", @"视频", @"相册", @"音乐"]];
     
-    yj.selectedSliderColor = [UIColor greenColor];
-    
     yj.selectBlock = ^(NSInteger index) {
         NSLog(@"%ld",(long)index);
     };

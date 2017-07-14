@@ -63,8 +63,9 @@
     }
     
     UITapGestureRecognizer * re = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click)];
-    
+    NSLog(@"%@",NSHomeDirectory());;
     [self addGestureRecognizer:re];
+    self.contentView.backgroundColor = [UIColor whiteColor];
     _titleLab.text = mode.sectionTitle;
 }
 @end

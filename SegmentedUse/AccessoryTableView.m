@@ -10,6 +10,7 @@
 #import "YJFileManage.h"
 #import "AccessorySectionHeadView.h"
 #import "SectionMode.h"
+#import "CellViewModel.h"
 static NSString * const kCellIdentifier = @"asdfasfwe";
 static NSString * const kHeadIdentifier = @"asdfewfadc";
 @interface AccessoryTableView () <UITableViewDelegate, UITableViewDataSource>
@@ -61,10 +62,6 @@ static NSString * const kHeadIdentifier = @"asdfewfadc";
     {
         return mode.rowNum;
     }
-    else
-    {
-        return 0;
-    }
     return 0;
 }
 
@@ -81,9 +78,23 @@ static NSString * const kHeadIdentifier = @"asdfewfadc";
     AccessorySectionHeadView * headView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kHeadIdentifier];
     headView.mode = _sectionData[section];
     headView.clickBlock = ^{
-        [tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
     };
     headView.backgroundColor = [UIColor redColor];
     return headView;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (cell.accessoryType == UITableViewCellAccessoryNone)
+    {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else
+    {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 @end
