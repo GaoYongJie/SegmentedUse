@@ -12,6 +12,10 @@
 
 @property (nonatomic, copy) NSString * fileName;
 
-@property (nonatomic, assign) BOOL isSign ;
+@property (nonatomic, copy) NSString * dataSize;
+
+@property (nonatomic, assign) BOOL isSign;  //是否选中
+
+@property (nonatomic, copy) NSData * data;  //是否选中
 
 @end

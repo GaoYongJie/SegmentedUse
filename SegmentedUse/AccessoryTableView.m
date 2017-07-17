@@ -11,6 +11,7 @@
 #import "AccessorySectionHeadView.h"
 #import "SectionMode.h"
 #import "CellViewModel.h"
+#import "CellModel.h"
 static NSString * const kCellIdentifier = @"asdfasfwe";
 static NSString * const kHeadIdentifier = @"asdfewfadc";
 @interface AccessoryTableView () <UITableViewDelegate, UITableViewDataSource>
@@ -30,21 +31,23 @@ static NSString * const kHeadIdentifier = @"asdfewfadc";
         self.delegate = self;
         self.dataSource = self;
         self.sectionHeaderHeight = 40;
-        self.rowHeight = 60;
-        _dataDic = [[YJFileManage returnAllAccessory] copy];
+        self.rowHeight = 80;
+        _dataDic = [NSDictionary dictionaryWithDictionary:[YJFileManage returnAllAccessory]];
         _allKeysArr = [_dataDic allKeys];
         _sectionData = [NSMutableArray array];
         
         for (NSString *title in _allKeysArr)
         {
-            SectionMode * model = [SectionMode new];
+            SectionMode * model = SectionMode.new;
             model.isExpanded = NO;
             model.sectionTitle = title;
-            model.rowNum = [_dataDic[title] count];
+            model.cellModelArr = [NSArray arrayWithArray:_dataDic[title]];
+//            model.rowNum = [_dataDic[title] count];
             [_sectionData addObject:model];
         }
         self.backgroundColor = [UIColor whiteColor];
-        [self registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
+//        [self registerClass:[CellViewModel class] forCellReuseIdentifier:kCellIdentifier];
+        [self registerNib:[UINib nibWithNibName:@"CellViewModel" bundle:nil] forCellReuseIdentifier:kCellIdentifier];
         [self registerNib:[UINib nibWithNibName:@"AccessorySectionHeadView" bundle:nil] forHeaderFooterViewReuseIdentifier:kHeadIdentifier];
     }
     return self;
@@ -60,16 +63,20 @@ static NSString * const kHeadIdentifier = @"asdfewfadc";
     SectionMode *mode = _sectionData[section];
     if (mode.isExpanded)
     {
-        return mode.rowNum;
+        return mode.cellModelArr.count;
     }
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
-    NSString * tempStr = _allKeysArr[indexPath.section];
-    cell.textLabel.text = _dataDic[tempStr][indexPath.row];
+    CellViewModel *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
+    NSString * type = _allKeysArr[indexPath.section];
+    CellModel *model = _dataDic[type][indexPath.row];
+    
+//    cell.textLabel.text = model.fileName;
+    cell.model = model;
+    cell.fileType = type;
     return cell;
 }
 
@@ -86,15 +93,21 @@ static NSString * const kHeadIdentifier = @"asdfewfadc";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (cell.accessoryType == UITableViewCellAccessoryNone)
+
+    CellViewModel *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    cell.model.isSign = !cell.model.isSign;
+    
+    if (cell.model.isSign)
     {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        cell.signImg.image = [UIImage imageNamed:@"round_sel"];
     }
     else
     {
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.signImg.image = [UIImage imageNamed:@"round"];
     }
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
 @end

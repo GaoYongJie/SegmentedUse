@@ -7,6 +7,7 @@
 //
 
 #import "YJFileManage.h"
+#import "CellModel.h"
 static NSString * const accessoryName = @"Accessory";
 
 @implementation YJFileManage
@@ -39,59 +40,63 @@ static NSString * const accessoryName = @"Accessory";
     return [[self returnNewPaht] stringByAppendingPathComponent:fileName];
 }
 
-+ (NSDictionary *)returnAllAccessory
++ (NSMutableDictionary *)returnAllAccessory
 {
-    NSFileManager *manager=[NSFileManager defaultManager];
+    NSFileManager *manager = [NSFileManager defaultManager];
     
     NSDirectoryEnumerator *enumerator = [manager enumeratorAtPath:[self returnNewPaht]];
 
-    NSString *filename;
+    NSString *fileName;
     
-    NSMutableArray * word;
-    NSMutableArray * excel;
-    NSMutableArray * pdf;
-//    NSMutableDictionary * dic ;//= [NSMutableDictionary dictionary];
-    while (filename = [enumerator nextObject]) {
+    NSMutableArray * word, * excel, * pdf;
+
+    NSMutableDictionary * dic = [NSMutableDictionary dictionary];
+
+    while (fileName = [enumerator nextObject]) {
         
-        if ([[filename pathExtension] isEqualToString:@"doc"] || [[filename pathExtension] isEqualToString:@"docx"])
+        CellModel * model = CellModel.new;
+        
+//        NSData * data = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",[self returnNewPaht], fileName]];
+        
+        long sizeLong = [self fileSizeAtPath:[NSString stringWithFormat:@"%@/%@",[self returnNewPaht], fileName]];
+        
+        model.fileName = fileName;
+        
+        model.dataSize = [NSString stringWithFormat:@"%ld",sizeLong];
+        
+        model.isSign = NO;
+        
+        if ([[fileName pathExtension] isEqualToString:@"doc"] || [[fileName pathExtension] isEqualToString:@"docx"])
         {
-//            NSData * data = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",[self returnNewPaht], filename]];
-            long l = [self fileSizeAtPath:[NSString stringWithFormat:@"%@/%@",[self returnNewPaht], filename]];
             if (!word)
             {
                 word = [NSMutableArray array];
+                dic[@"WORD"] = word;
             }
-            [word addObject:filename];
-            
-            NSLog(@"%ld",l);
+            [word addObject:model];
         }
-        else if ([[filename pathExtension] isEqualToString:@"xls"])
+        else if ([[fileName pathExtension] isEqualToString:@"xls"])
         {
-//            NSData * data = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",[self returnNewPaht], filename]];
-            long l = [self fileSizeAtPath:[NSString stringWithFormat:@"%@/%@",[self returnNewPaht], filename]];
             if (!excel)
             {
                 excel = [NSMutableArray array];
+                dic[@"EXCEL"] = excel;
             }
-            [excel addObject:filename];
-            NSLog(@"%ld",l);
+            
+            [excel addObject:model];
         }
-        else if ([[filename pathExtension] isEqualToString:@"pdf"])
+        else if ([[fileName pathExtension] isEqualToString:@"pdf"])
         {
             if (!pdf)
             {
                 pdf = [NSMutableArray array];
+                dic[@"PDF"] = pdf;
             }
-            [pdf addObject:filename];
-//            NSData * data = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",[self returnNewPaht], filename]];
-            long l = [self fileSizeAtPath:[NSString stringWithFormat:@"%@/%@",[self returnNewPaht], filename]];
-            NSLog(@"%ld",l);
-            
+            [pdf addObject:model];
         }
     }
-    
-  return  @{@"WORD":word, @"EXCEL":excel, @"PDF":pdf};
-//    return dic;
+
+    return dic;
 }
 
 + (long)fileSizeAtPath:(NSString *)filePath

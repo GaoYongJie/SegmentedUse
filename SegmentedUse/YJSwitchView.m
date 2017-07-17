@@ -7,6 +7,7 @@
 //
 
 #import "YJSwitchView.h"
+
 @interface YJSwitchView () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIView              * bottomView;
@@ -64,8 +65,8 @@
     UISegmentedControl *segmented = [[UISegmentedControl alloc] initWithItems:_titles];
     [segmented setSelectedSegmentIndex:0];
     [segmented setTintColor:[UIColor clearColor]];
-    [segmented setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15],NSForegroundColorAttributeName: [UIColor blackColor]} forState:UIControlStateNormal];
-    [segmented setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15],NSForegroundColorAttributeName: self.selectedSliderColor} forState:UIControlStateSelected];
+    [segmented setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15], NSForegroundColorAttributeName:[UIColor blackColor]} forState:UIControlStateNormal];
+    [segmented setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15], NSForegroundColorAttributeName:self.selectedSliderColor} forState:UIControlStateSelected];
     [segmented addTarget:self action:@selector(clickSemented:) forControlEvents:UIControlEventValueChanged];
     segmented.frame = (CGRect){0, 0, self.bounds.size.width, _sliderViewHeight};
     
@@ -83,8 +84,9 @@
     UIScrollView * scrollView = [[UIScrollView alloc] initWithFrame:(CGRect){0, _sliderViewHeight, self.bounds.size.width, self.bounds.size.height - _sliderViewHeight}];
     scrollView.pagingEnabled = YES;
     scrollView.delegate = self;
+    scrollView.showsHorizontalScrollIndicator = NO;
     scrollView.contentSize = (CGSize){self.bounds.size.width * _itemCount, self.bounds.size.height - _sliderViewHeight};
-    scrollView.backgroundColor = [UIColor grayColor];
+    scrollView.backgroundColor = [UIColor whiteColor];
     
     [self addSubview:scrollView];
     _scrollView = scrollView;
@@ -103,16 +105,16 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGPoint point = scrollView.contentOffset;
-    
-//    NSLog(@"%f,%f",point.x, point.y);
+//    NSLog(@"%@",@(point.x / _itemCount));
+    NSLog(@"%@",@(point.x / self.bounds.size.width));
     _bottomView.transform = CGAffineTransformMakeTranslation(point.x / _itemCount, 0);
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     CGPoint point = scrollView.contentOffset;
-    //    point.x / self.view.bounds.size.width;
     [_segmented setSelectedSegmentIndex:point.x / self.bounds.size.width];
+    
 }
 
 - (void)clickSemented:(UISegmentedControl *)tempSegmented

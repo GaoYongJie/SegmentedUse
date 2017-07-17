@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@class CellModel;
 
 @interface CellViewModel : UITableViewCell
 
+@property (nonatomic, strong) CellModel * model;
+
+@property (weak, nonatomic) IBOutlet UIImageView *signImg;
+
+@property (weak, nonatomic) NSString *fileType;
 @end

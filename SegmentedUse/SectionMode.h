@@ -10,10 +10,12 @@
 
 @interface SectionMode : NSObject
 
-@property(nonatomic, assign) BOOL isExpanded;
+@property (nonatomic, assign) BOOL isExpanded;
 
 @property (nonatomic, strong)NSString *sectionTitle;
 
-@property (nonatomic, assign)NSInteger rowNum;
+@property (nonatomic, strong)NSArray  *cellModelArr;
+
+//@property (nonatomic, assign)NSInteger rowNum;
 
 @end
