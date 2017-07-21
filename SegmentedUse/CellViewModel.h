@@ -16,4 +16,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *signImg;
 
 @property (weak, nonatomic) NSString *fileType;
+
+@property (weak, nonatomic) IBOutlet UIButton *iconBtn;
 @end

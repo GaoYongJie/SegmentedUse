@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 @interface CellModel : NSObject
 
 @property (nonatomic, copy) NSString * fileName;
@@ -16,6 +16,6 @@
 
 @property (nonatomic, assign) BOOL isSign;  //是否选中
 
-@property (nonatomic, copy) NSData * data;  //是否选中
+@property (nonatomic, copy) NSData * data;
 
 @end

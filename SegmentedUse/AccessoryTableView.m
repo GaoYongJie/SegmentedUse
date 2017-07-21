@@ -42,7 +42,6 @@ static NSString * const kHeadIdentifier = @"asdfewfadc";
             model.isExpanded = NO;
             model.sectionTitle = title;
             model.cellModelArr = [NSArray arrayWithArray:_dataDic[title]];
-//            model.rowNum = [_dataDic[title] count];
             [_sectionData addObject:model];
         }
         self.backgroundColor = [UIColor whiteColor];
@@ -73,8 +72,6 @@ static NSString * const kHeadIdentifier = @"asdfewfadc";
     CellViewModel *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
     NSString * type = _allKeysArr[indexPath.section];
     CellModel *model = _dataDic[type][indexPath.row];
-    
-//    cell.textLabel.text = model.fileName;
     cell.model = model;
     cell.fileType = type;
     return cell;
@@ -108,6 +105,5 @@ static NSString * const kHeadIdentifier = @"asdfewfadc";
     {
         cell.signImg.image = [UIImage imageNamed:@"round"];
     }
-
 }
 @end

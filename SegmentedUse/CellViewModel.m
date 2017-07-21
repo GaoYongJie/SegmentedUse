@@ -13,7 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *fileNameLab;
 
-@property (weak, nonatomic) IBOutlet UIButton *iconBtn;
+
 @end
 @implementation CellViewModel
 
@@ -63,10 +63,18 @@
     }
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
+//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+//{
+//    self.model.isSign = !self.model.isSign;
+//    
+//    if (self.model.isSign)
+//    {
+//        self.signImg.image = [UIImage imageNamed:@"round_sel"];
+//    }
+//    else
+//    {
+//        self.signImg.image = [UIImage imageNamed:@"round"];
+//    }
+//}
 
 @end
